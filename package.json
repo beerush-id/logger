@@ -1,43 +1,49 @@
 {
   "name": "@beerush/logger",
-  "version": "1.0.0",
+  "description": "Javascript logger library for browser, node, serverless, and other javascript environment.",
+  "version": "0.0.1",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.cjs",
+      "import.types": "./dist/index.d.ts",
+      "require.types": "./dist/index.d.cts"
     },
     "./adapters/*": "./dist/adapters/*",
     "./adapters/console": {
-      "types": "./dist/adapters/console/index.d.ts",
       "import": "./dist/adapters/console/index.js",
-      "require": "./dist/adapters/console/index.cjs"
+      "require": "./dist/adapters/console/index.cjs",
+      "import.types": "./dist/adapters/console/index.d.ts",
+      "require.types": "./dist/adapters/console/index.d.cts"
     },
     "./adapters/file": {
-      "types": "./dist/adapters/file/index.d.ts",
       "import": "./dist/adapters/file/index.js",
-      "require": "./dist/adapters/file/index.cjs"
+      "require": "./dist/adapters/file/index.cjs",
+      "import.types": "./dist/adapters/file/index.d.ts",
+      "require.types": "./dist/adapters/file/index.d.cts"
     },
     "./adapters/sentry": {
-      "types": "./dist/adapters/sentry/index.d.ts",
       "import": "./dist/adapters/sentry/index.js",
-      "require": "./dist/adapters/sentry/index.cjs"
+      "require": "./dist/adapters/sentry/index.cjs",
+      "import.types": "./dist/adapters/sentry/index.d.ts",
+      "require.types": "./dist/adapters/sentry/index.d.cts"
     },
     "./adapters/webhook": {
-      "types": "./dist/adapters/webhook/index.d.ts",
       "import": "./dist/adapters/webhook/index.js",
-      "require": "./dist/adapters/webhook/index.cjs"
+      "require": "./dist/adapters/webhook/index.cjs",
+      "import.types": "./dist/adapters/webhook/index.d.ts",
+      "require.types": "./dist/adapters/webhook/index.d.cts"
     }
   },
   "scripts": {
     "dev": "tsup --watch",
-    "build": "rimraf dist && tsup && publint"
+    "build": "rimraf dist && tsup && publint",
+    "prepublish": "rimraf dist && tsup && publint"
   },
-  "description": "To install dependencies:",
-  "peerDependencies": {
+  "optionalDependencies": {
     "@sentry/browser": "^7.114.0"
   },
   "devDependencies": {
