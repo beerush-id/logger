@@ -219,13 +219,13 @@ logger.info('Hello, World!'); // This will log the message to the external servi
 ## 🗃️ Built-in Adapters
 
 - [x] Logger module.
-- [x] [Console adapter](./adapters/console/readme.md)
-- [x] [Webhook adapter](./adapters/webhook/readme.md).
-- [x] [File adapter](./adapters/file/readme.md).
-- [x] [Sentry adapter](./adapters/sentry/readme.md).
-- [ ] [Mixpanel adapter](./adapters/mixpanel/readme.md).
-- [ ] [Slack adapter](./adapters/slack/readme.md).
-- [ ] [Discord adapter](./adapters/discord/readme.md).
+- [x] [Console adapter](./src/adapters/console/readme.md)
+- [x] [Webhook adapter](./src/adapters/webhook/readme.md).
+- [x] [File adapter](./src/adapters/file/readme.md).
+- [x] [Sentry adapter](./src/adapters/sentry/readme.md).
+- [ ] [Mixpanel adapter](./src/adapters/mixpanel/readme.md).
+- [ ] [Slack adapter](./src/adapters/slack/readme.md).
+- [ ] [Discord adapter](./src/adapters/discord/readme.md).
 
 ## License
 
