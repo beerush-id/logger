@@ -126,3 +126,5 @@ test
 .eslintrc.json
 jest.config.js
 .eslintrc
+*.jpg
+readme.jpg
