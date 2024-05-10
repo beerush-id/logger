@@ -112,6 +112,9 @@ The logger supports various log levels, each with its own significance. The log 
 * **DEBUG**: This level is used for general debugging information. These logs are usually only needed for debugging.
 * **VERBOSE**: This level is used for detailed debugging information. These logs are usually only needed for debugging.
 
+> The logger will log all logs with a level greater than or equal to the log level of the logger. For example, setting
+> the adapter level to INFO will log all logs with a level of INFO, WARN, or ERROR, but not DEBUG or VERBOSE.
+
 ### Log Tracking
 
 The logger supports tracking logs. Tracking logs are useful for tracking the execution of a specific part of the code.
