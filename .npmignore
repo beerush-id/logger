@@ -127,4 +127,4 @@ test
 jest.config.js
 .eslintrc
 *.jpg
-readme.jpg
+preview.jpg

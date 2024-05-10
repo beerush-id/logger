@@ -5,7 +5,7 @@ reality. This versatile logger, free of dependencies, is designed to standardize
 adapters tailored to different environments. Embrace a unified approach to all levels of logging with @beerush/logger.
 Start simplifying your logging process today!
 
-![Logger](./readme.jpg)
+![Logger](./preview.jpg)
 
 ## 🐞 Background
 
