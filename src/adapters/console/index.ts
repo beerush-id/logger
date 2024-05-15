@@ -1,72 +1,28 @@
 import { type Log, type LogAdapter, LogLevel } from '../../index.js';
 
+export type ConsoleFormatter = (log: Log) => string;
 export type ConsoleConfig = {
   level?: LogLevel;
   trace?: boolean;
   timestamp?: boolean;
+  format?: ConsoleFormatter;
 };
 
 export function consoleAdapter(config?: ConsoleConfig): LogAdapter {
-  const { level = LogLevel.VERBOSE, trace = false, timestamp = true } = config ?? {};
+  const { level = LogLevel.VERBOSE, trace = false, timestamp = true, format = formatMessage } = config ?? {};
 
   const emitter: {
     [K in LogLevel]?: (...args: unknown[]) => void;
   } = {
     [LogLevel.VERBOSE]: (...args: unknown[]) => {
-      (trace ? console.trace : console.debug)(
-        ...args.map((arg, i) => {
-          if (typeof arg === 'string') {
-            return i === 0 ? `📜 ${verboseColor(arg)}` : arg;
-          }
-
-          return arg;
-        })
-      );
+      (trace ? console.trace : console.debug)(...args);
     },
     [LogLevel.DEBUG]: (...args: unknown[]) => {
-      (trace ? console.trace : console.debug)(
-        ...args.map((arg, i) => {
-          if (typeof arg === 'string') {
-            return i === 0 ? `🐞 ${debugColor(arg)}` : arg;
-          }
-
-          return arg;
-        })
-      );
+      (trace ? console.trace : console.debug)(...args);
     },
-    [LogLevel.INFO]: (...args: unknown[]) => {
-      console.log(
-        ...args.map((arg, i) => {
-          if (typeof arg === 'string') {
-            return i === 0 ? `ℹ️ ${infoColor(arg)}` : arg;
-          }
-
-          return arg;
-        })
-      );
-    },
-    [LogLevel.WARN]: (...args: unknown[]) => {
-      console.warn(
-        ...args.map((arg, i) => {
-          if (typeof arg === 'string') {
-            return i === 0 ? `⚠️ ${warnColor(arg)}` : arg;
-          }
-
-          return arg;
-        })
-      );
-    },
-    [LogLevel.ERROR]: (...args: unknown[]) => {
-      console.error(
-        ...args.map((arg, i) => {
-          if (typeof arg === 'string') {
-            return i === 0 ? `❌ ${errorColor(arg)}` : arg;
-          }
-
-          return arg;
-        })
-      );
-    },
+    [LogLevel.INFO]: console.log,
+    [LogLevel.WARN]: console.warn,
+    [LogLevel.ERROR]: console.error,
   };
 
   return {
@@ -78,7 +34,7 @@ export function consoleAdapter(config?: ConsoleConfig): LogAdapter {
         const args: unknown[] = [];
 
         if (typeof log.message === 'string') {
-          args.push(createMessage(log, timestamp));
+          args.push(typeof format === 'function' ? format(log, timestamp) : formatMessage(log, timestamp));
         } else {
           args.push(log.message);
         }
@@ -101,7 +57,7 @@ export function consoleAdapter(config?: ConsoleConfig): LogAdapter {
   };
 }
 
-export function createMessage(log: Log, timestamp?: boolean, stack?: boolean): string {
+export function formatMessage(log: Log, timestamp?: boolean, stack?: boolean, colorful = true): string {
   let message = ` ${log.message}`;
 
   if (timestamp) {
@@ -114,6 +70,29 @@ export function createMessage(log: Log, timestamp?: boolean, stack?: boolean): s
 
   if (stack && log.error instanceof Error) {
     message = `${message}\n${log.error.stack}`;
+  }
+
+  if (colorful) {
+    switch (log.level) {
+      case LogLevel.ERROR:
+        message = `❌ ${errorColor(message)}`;
+        break;
+      case LogLevel.WARN:
+        message = `⚠️ ${warnColor(message)}`;
+        break;
+      case LogLevel.INFO:
+        message = `ℹ️ ${infoColor(message)}`;
+        break;
+      case LogLevel.DEBUG:
+        message = `🐞 ${debugColor(message)}`;
+        break;
+      case LogLevel.VERBOSE:
+        message = `📜 ${verboseColor(message)}`;
+        break;
+      default:
+        message = `⚡ ${primaryColor(message)}`;
+        break;
+    }
   }
 
   return message.trim();

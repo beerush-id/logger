@@ -2,15 +2,17 @@ import { type Log, type LogAdapter, LogLevel } from '../../index.js';
 import { appendFile, mkdir, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import * as process from 'node:process';
+import { type ConsoleFormatter } from '../console/index.js';
 
 export type FileConfig = {
   location?: string;
   filename?: string;
   level?: LogLevel;
+  format?: ConsoleFormatter;
 };
 
 export function fileAdapter(config?: FileConfig): LogAdapter {
-  const { location = './logs', filename = '%y-%m-%d.log.toml', level = LogLevel.WARN } = config ?? {};
+  const { location = './logs', filename = '%y-%m-%d.log.toml', level = LogLevel.WARN, format } = config ?? {};
 
   const queues: string[] = [];
   let writing = false;
@@ -59,10 +61,11 @@ export function fileAdapter(config?: FileConfig): LogAdapter {
     emit: (log: Log) => {
       if (level < log.level) return;
 
+      const message = typeof format === 'function' ? format(log) : log.message;
       const contents = [
         '[[logs]]',
         `level = ${log.level}`,
-        `message = ${JSON.stringify(log.message)}`,
+        `message = ${JSON.stringify(message)}`,
         `timestamp = ${JSON.stringify(log.timestamp.toISOString())}`,
       ];
 
