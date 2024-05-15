@@ -1,7 +1,7 @@
 {
   "name": "@beerush/logger",
   "description": "Javascript logger library for browser, node, serverless, and other javascript environment.",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "type": "module",
