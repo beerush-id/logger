@@ -5,7 +5,7 @@ export default defineConfig({
   outDir: './dist',
   dts: true,
   splitting: false,
-  minify: true,
+  minify: false,
   format: [ 'esm', 'cjs' ],
   bundle: false,
   platform: 'browser',

@@ -1,4 +1,5 @@
-import { type Log, type LogAdapter, LogLevel } from '../../index.js';
+
+import { type Log, type LogAdapter, LogLevel } from '../../logger.js';
 
 export type WebhookConfig = {
   url: string;

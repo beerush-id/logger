@@ -1,6 +1,7 @@
-import { createLogger, LogLevel } from '../dist/index.js';
-import { fileAdapter } from '../dist/adapters/file/index.js';
 import { consoleAdapter } from '../dist/adapters/console/index.js';
+import { fileAdapter } from '../dist/adapters/file/index.js';
+import { createLogger } from '../dist/index.js';
+import { LogLevel } from '../dist/logger.js';
 
 const logger = createLogger();
 

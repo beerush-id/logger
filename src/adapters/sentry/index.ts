@@ -1,6 +1,6 @@
 import { type BrowserClient, type EventHint } from '@sentry/browser';
-import { type Log, LogLevel } from '../../index.js';
 import { type ConsoleFormatter, formatMessage } from '../console/index.js';
+import { type Log, LogLevel } from '../../logger.js';
 
 export type SentryConfig = {
   client: unknown;

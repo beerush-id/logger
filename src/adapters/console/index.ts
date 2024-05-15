@@ -1,4 +1,5 @@
-import { type Log, type LogAdapter, LogLevel } from '../../index.js';
+
+import { type Log, type LogAdapter, LogLevel } from '../../logger.js';
 
 export type ConsoleFormatter = (log: Log) => string;
 export type ConsoleConfig = {

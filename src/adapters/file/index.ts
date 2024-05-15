@@ -1,8 +1,9 @@
-import { type Log, type LogAdapter, LogLevel } from '../../index.js';
+
 import { appendFile, mkdir, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import * as process from 'node:process';
 import { type ConsoleFormatter } from '../console/index.js';
+import { type Log, type LogAdapter, LogLevel } from '../../logger.js';
 
 export type FileConfig = {
   location?: string;
