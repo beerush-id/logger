@@ -37,6 +37,7 @@ local
   .info('Server started')
   .warn('Server started')
   .error('Server error', new Error('Server error'))
+  .error(new Error('Server error'))
   .info('Server started', { extra: 'extra' });
 
 local.use(consoleAdapter({ format: (log) => `${new Date()} -> ${log.message}` }));

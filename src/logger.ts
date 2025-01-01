@@ -54,7 +54,7 @@ export type Logger<T> = {
    * @param extra
    * @returns {Logger<T>}
    */
-  error<E extends Error = Error>(message: string, error?: E, ...extra: unknown[]): Logger<T>;
+  error<E extends Error = Error>(message: string | E, error?: E, ...extra: unknown[]): Logger<T>;
   /**
    * Log a message with the DEBUG level.
    * @param {string} message
