@@ -19,6 +19,7 @@ export type Log<E extends Error = Error> = {
   level: LogLevel;
   message: string;
   timestamp: Date;
+  timing?: number;
   user?: User;
   tags?: string[];
   extra?: unknown;
@@ -88,6 +89,13 @@ export type Logger<T> = {
    * @returns {Logger<C>}
    */
   create<C>(config?: LoggerConfig): Logger<C>;
+  /**
+   * Log a message with the DEBUG level and a timing information.
+   * @param {string} message
+   * @param extra
+   * @returns {() => void}
+   */
+  timing(message: string, ...extra: unknown[]): (...extras: unknown[]) => number;
   /**
    * Link a logger instance to the current one. It will override the linked logger's adapters.
    * @param {Logger<unknown>} logger

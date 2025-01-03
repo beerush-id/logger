@@ -19,6 +19,12 @@ local
 
 local.info('Server started', 'extra', 'extra2');
 
+const finishRequest = local.timing('Requesting data.');
+
+setTimeout(() => {
+  finishRequest();
+}, Math.random() * 1000);
+
 console.log('');
 
 const socket = local.create({ tags: ['SOCKET'] });

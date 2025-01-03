@@ -70,6 +70,17 @@ export function createLogger<T>(config?: LoggerConfig, adapters = new Map<string
       this.log({ level: LogLevel.WARN, message, timestamp: new Date(), extra });
       return this;
     },
+    timing(message: string, ...extra: unknown[]) {
+      const start = Date.now();
+      this.log({ level: LogLevel.VERBOSE, message, timestamp: new Date(), extra });
+
+      return (...extras: unknown[]) => {
+        const timing = Date.now() - start;
+        this.log({ level: LogLevel.DEBUG, message, timestamp: new Date(), timing, extra: [...extra, ...extras] });
+
+        return timing;
+      };
+    },
     error<E extends Error = Error>(message: string | E, error?: E, ...extra: unknown[]) {
       if (typeof message !== 'string') {
         message = error?.message ?? 'An error occurred.';

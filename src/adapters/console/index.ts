@@ -1,4 +1,3 @@
-
 import { type Log, type LogAdapter, LogLevel } from '../../logger.js';
 
 export type ConsoleFormatter = (log: Log) => string;
@@ -63,6 +62,10 @@ export function formatMessage(log: Log, timestamp?: boolean, stack?: boolean, co
 
   if (timestamp) {
     message = `[${log.timestamp.toLocaleString()}]${message}`;
+  }
+
+  if (log.timing) {
+    message = `[⌛ ${log.timing.toLocaleString()}ms]${message}`;
   }
 
   if (log.tags?.length) {
